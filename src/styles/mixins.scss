@@ -1,0 +1,11 @@
+@mixin hideOnWidth($width) {
+  @media (max-width: $width ) {
+      display: none !important;
+  }
+}
+
+@mixin showOnWidth($width) {
+  @media (max-width: $width ) {
+      display: initial;
+  }
+}

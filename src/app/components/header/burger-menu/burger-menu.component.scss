@@ -1,0 +1,34 @@
+.Burger{
+  position: relative;
+  min-height: 20px;
+  min-width: 100px;
+  cursor: pointer;
+
+  &_line{
+      width: 60%;
+      height: 2px;
+      background-color: #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &::before{
+         content: '';
+         position: absolute;
+         width: 100%;
+         height: 2px;
+         background-color: #000;
+         top: 20px
+      }
+
+      &::after{
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          background-color: #000;
+          top: -20px
+      }
+  }
+}

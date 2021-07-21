@@ -1,8 +1,11 @@
 @import './variables.scss';
-
+@import './mixins.scss';
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
 
+.clickable{
+  cursor: pointer;
 }

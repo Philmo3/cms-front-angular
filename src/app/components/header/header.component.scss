@@ -1,0 +1,28 @@
+@import './../../../styles.scss';
+
+.Header{
+
+  &_menu{
+    min-height: 100px;
+    @media (max-width: $tablet-bp) {
+      justify-content: space-between !important;
+    }
+  }
+
+  &_menu_logo{
+    align-self: center;
+  }
+
+
+  &_menu_item{
+    align-self: center;
+    @include hideOnWidth($tablet-bp)
+  }
+
+
+  &_burger{
+    display: none;
+    align-self: center;
+    @include showOnWidth($tablet-bp)
+  }
+}

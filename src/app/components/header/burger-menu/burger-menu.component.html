@@ -1,0 +1,35 @@
+<div class="Burger">
+  <div class="Burger_line" (click)='openOrClose(true)'></div>
+  <nz-drawer
+      [nzClosable]="false"
+      [nzVisible]="burgerIsOpen"
+      nzPlacement="right"
+      (nzOnClose)="openOrClose(false)"
+    >
+      <ng-container *nzDrawerContent>
+        <ul nz-menu nzMode="vertical">
+          <li nz-menu-item nzSelected>
+            <i nz-icon ></i>
+            Product
+          </li>
+          <li nz-menu-item >
+            <i nz-icon ></i>
+            Demo
+          </li>
+          <li nz-menu-item >
+            <i nz-icon ></i>
+            Documentation
+          </li>
+          <li nz-menu-item >
+            <i nz-icon ></i>
+            Login
+          </li>
+          <li nz-menu-item >
+            <i nz-icon ></i>
+            Sign Up
+          </li>
+
+        </ul>
+      </ng-container>
+    </nz-drawer>
+</div>

@@ -11,13 +11,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { HeaderComponent } from './components/header/header.component';
+import { BurgerMenuComponent } from './components/header/burger-menu/burger-menu.component';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    BurgerMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzMenuModule
+    NzMenuModule,
+    NzDrawerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

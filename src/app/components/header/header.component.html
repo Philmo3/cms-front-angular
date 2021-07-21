@@ -1,15 +1,16 @@
-<ul nz-menu nzMode="horizontal">
-  <div>
-    there will be a logo
-  </div>
-  <div class="d-flex justify-content-around">
-    <div class="d-flex">
+<ul nz-menu nzMode="horizontal" style="min-height: 100px;">
+
+  <div class="Header_menu  d-flex justify-content-around">
+    <div class="Header_menu_logo clickable" routerLink='home'>
+      there will be a logo
+    </div>
+    <div class="Header_menu_item  d-flex">
       <li nz-menu-item nzSelected>
-        <i nz-icon nzType="mail"></i>
+        <i nz-icon></i>
         Product
       </li>
       <li nz-menu-item>
-        <i nz-icon nzType="appstore"></i>
+        <i nz-icon ></i>
         Demo
       </li>
       <li nz-submenu nzTitle="Documentation">
@@ -42,15 +43,19 @@
       </li>
     </div>
 
-    <div class="d-flex">
+    <div class="Header_menu_item d-flex">
       <li nz-menu-item>
         <i nz-icon nzIcon="login"></i>
         Login
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item routerLink='sign-up'>
         <i nz-icon nzIcon="form"></i>
         Sign Up
       </li>
+    </div>
+
+    <div class="Header_burger">
+      <app-burger-menu></app-burger-menu>
     </div>
 
   </div>
