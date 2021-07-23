@@ -1,0 +1,13 @@
+@import '../../../styles.scss';
+.FormSection{
+  height: 80vh;
+
+
+  @media (max-width: $s-tablet-bp) {
+    height: 70vh;
+  }
+
+  @media (max-width: $mobile-bp) {
+    height: 60vh;
+  }
+}

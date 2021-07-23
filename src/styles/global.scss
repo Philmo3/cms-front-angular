@@ -9,3 +9,12 @@ body {
 .clickable{
   cursor: pointer;
 }
+
+
+.Page{
+
+  &_section{
+    padding: 3em;
+  }
+
+}

@@ -20,7 +20,7 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     HeaderComponent,
-    BurgerMenuComponent
+    BurgerMenuComponent,
   ],
   imports: [
     BrowserModule,
