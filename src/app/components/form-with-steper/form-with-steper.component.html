@@ -1,18 +1,18 @@
 <div [ngSwitch]="currentSteps">
   <ng-container *ngFor="let formStepper of formSteppers">
     <div  *ngSwitchCase="formStepper.sectionNumber">
-      <app-form-section [title]="formStepper.sectionTitle">
-        <form>
-
-        </form>
+      <app-form-section ngSwitch='0' [title]="formStepper.sectionTitle">
+          <form  nz-row *ngFor="let formGroup of formStepper.formGroups" [formGroup]='formGroup'>
+            <div *ngFor="let control of formGroup.controls | keyvalue" nz-col [nzSpan]='((formGroup | countControl | roundValue)  / 12) | number:"1.0"' > {{ formGroup | countControl | roundValue}} </div>
+          </form>
       </app-form-section>
     </div>
   </ng-container>
 </div>
 
 <div class="w-100 d-flex justify-content-between my-4">
-<button nz-button nzType="default">Previous section</button>
-<button nz-button nzType="primary">Next section</button>
+<button (click)='previous()' nz-button nzType="default">Previous section</button>
+<button (click)='next()' nz-button nzType="primary">Next section</button>
 </div>
 
 <nz-steps *ngFor="let formStepper of formSteppers; trackBy: trackBySectionNumber; let last = last" [nzCurrent]="currentSteps">
