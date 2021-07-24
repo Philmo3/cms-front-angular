@@ -1,9 +1,11 @@
 <div [ngSwitch]="currentSteps">
   <ng-container *ngFor="let formStepper of formSteppers">
-    <div  *ngSwitchCase="formStepper.sectionNumber">
-      <app-form-section ngSwitch='0' [title]="formStepper.sectionTitle">
-          <form  nz-row *ngFor="let formGroup of formStepper.formGroups" [formGroup]='formGroup'>
-            <div *ngFor="let control of formGroup.controls | keyvalue" nz-col [nzSpan]='((formGroup | countControl | roundValue)  / 12) | number:"1.0"' > {{ formGroup | countControl | roundValue}} </div>
+    <div [ngClass]='formExtraClass' *ngSwitchCase="formStepper.sectionNumber">
+      <app-form-section [ngClass]='sectionExtraClass'  [title]="formStepper.sectionTitle">
+          <form nzForm *ngFor="let formGroup of formStepper.formGroups" >
+
+              <app-form-input-factory [formGroup]='formGroup' class="w-100" [inputExtraClass]='inputExtraClass' > </app-form-input-factory>
+
           </form>
       </app-form-section>
     </div>

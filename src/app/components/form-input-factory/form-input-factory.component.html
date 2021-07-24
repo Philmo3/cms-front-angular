@@ -1,0 +1,23 @@
+
+<ng-container *ngFor="let control of controls">
+  <nz-form-item [ngClass]='inputExtraClass'>
+    <nz-form-label
+      
+    >
+      {{control.name}}
+    </nz-form-label>
+      <nz-form-control  [formGroup]='group!' [ngSwitch]='control.control.fieldType' [nzErrorTip]="control.control.errorTip ? control.control.errorTip : ''">
+        <input
+        *ngSwitchCase="'text'"
+        type="text"
+        nz-input
+        [formControlName]='control.name'
+        [placeholder]='control.name'
+        nzSize="large"
+        />
+        <input  *ngSwitchCase="'password'" type="password" nz-input [formControlName]='control.name' [placeholder]='control.name' nzSize="large" [required]='control.control.formAttributes.required ? control.control.formAttributes.required : false' />
+      </nz-form-control>
+
+  </nz-form-item>
+
+</ng-container>

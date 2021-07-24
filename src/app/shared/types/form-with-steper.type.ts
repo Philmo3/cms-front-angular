@@ -14,7 +14,8 @@ export type FormWithStepper = {
 
 export class FormTypedControl extends FormControl {
 	fieldType: FieldType = "text";
-	formAttributes?: FormAttribute[];
+	formAttributes: FormAttribute = {};
+	errorTip: string | undefined;
 
 	constructor(
 		fieldType: FieldType,
@@ -26,11 +27,13 @@ export class FormTypedControl extends FormControl {
 			| null
 			| undefined,
 		asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null | undefined,
-		formAttributes?: FormAttribute[]
+		formAttributes: FormAttribute = {},
+		errorTip?: string
 	) {
 		super(formState, validatorOrOpts, asyncValidator);
 		this.fieldType = fieldType;
 		this.formAttributes = formAttributes;
+		this.errorTip = errorTip;
 	}
 }
 

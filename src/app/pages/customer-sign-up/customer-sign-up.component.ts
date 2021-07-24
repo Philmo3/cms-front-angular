@@ -3,7 +3,7 @@ import { FormGroup, Validators } from "@angular/forms";
 import {
 	FormTypedControl,
 	FormWithStepper
-} from "src/app/components/form-with-steper/form-with-steper.type";
+} from "src/app/shared/types/form-with-steper.type";
 import { UserService } from "src/app/services/user-service.service";
 import { AsyncEmailValidator } from "src/app/shared/asyncValidators/asyncEmailValidator";
 import { EqualFieldValidator } from "src/app/shared/validator/equalFieldValidator";
@@ -20,21 +20,22 @@ export class CustomerSignUpComponent implements OnInit {
 			formGroups: [
 				new FormGroup({
 					name: new FormTypedControl("text", "", [Validators.required], null, [
-						{ required: true }
+						{ required: true },
+						"Your name is required"
 					]),
 					lastName: new FormTypedControl(
 						"text",
 						"",
 						[Validators.required],
 						null,
-						[{ required: true }]
+						{ required: true }
 					),
 					email: new FormTypedControl(
 						"text",
 						"",
 						[Validators.required, Validators.email],
 						[AsyncEmailValidator.userEmailValidator(this.userService)],
-						[{ required: true }]
+						{ required: true }
 					)
 				}),
 				new FormGroup({
@@ -43,14 +44,14 @@ export class CustomerSignUpComponent implements OnInit {
 						"",
 						[Validators.required, Validators.minLength(10)],
 						null,
-						[{ required: true }]
+						{ required: true }
 					),
 					confirmPassword: new FormTypedControl(
 						"password",
 						"",
 						[Validators.required, EqualFieldValidator.validator("password")],
 						null,
-						[{ required: true }]
+						{ required: true }
 					)
 				})
 			],

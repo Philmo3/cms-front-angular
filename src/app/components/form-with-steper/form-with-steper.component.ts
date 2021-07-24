@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormWithStepper } from "./form-with-steper.type";
+import { FormWithStepper } from "../../shared/types/form-with-steper.type";
 
 @Component({
 	selector: "app-form-with-steper",
@@ -10,6 +10,12 @@ export class FormWithSteperComponent implements OnInit {
 	@Input() formSteppers: FormWithStepper[] = [];
 
 	@Input() showFinishStep: boolean = true;
+
+	@Input() formExtraClass: string = "";
+
+	@Input() sectionExtraClass: string = "";
+
+	@Input() inputExtraClass: string = "";
 
 	currentSteps = 0;
 
@@ -36,13 +42,24 @@ export class FormWithSteperComponent implements OnInit {
 	private currentSectionFormIsValid(): boolean {
 		const currentForm = this.formSteppers[this.currentSteps].formGroups;
 		let isValid = true;
-		console.log(currentForm);
+
 		for (
 			let formIndex = 0;
 			formIndex < currentForm.length && isValid;
 			formIndex++
 		) {
 			isValid = currentForm[formIndex].valid;
+		}
+
+		if (!isValid) {
+			currentForm.forEach(group => {
+				for (const i in group.controls) {
+					if (group.controls.hasOwnProperty(i)) {
+						group.controls[i].markAsDirty();
+						group.controls[i].updateValueAndValidity();
+					}
+				}
+			});
 		}
 
 		return isValid;
