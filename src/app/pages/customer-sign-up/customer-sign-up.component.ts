@@ -9,6 +9,8 @@ import { UserService } from "src/app/services/user-service.service";
 import { AsyncEmailValidator } from "src/app/shared/asyncValidators/asyncEmailValidator";
 import { EqualFieldValidator } from "src/app/shared/validator/equalFieldValidator";
 import { CompanyService } from "src/app/services/company.service";
+import { CountryService } from "src/app/services/country.service";
+import { count } from "rxjs/operators";
 
 @Component({
 	selector: "app-customer-sign-up",
@@ -113,7 +115,8 @@ export class CustomerSignUpComponent implements OnInit {
 
 	constructor(
 		private userService: UserService,
-		private companyService: CompanyService
+		private companyService: CompanyService,
+		private coutryService: CountryService
 	) {}
 
 	ngOnInit(): void {
@@ -129,11 +132,21 @@ export class CustomerSignUpComponent implements OnInit {
 			"country"
 		) as FormTypedControl<DropDownDataType>;
 
-		countryControl.setData([
-			{
-				label: "hello",
-				value: "hello"
-			}
-		]);
+		if (countryControl) {
+			this.coutryService
+				.getAllCountries()
+				.toPromise()
+				.then(countries => {
+					const data: DropDownDataType[] = [];
+
+					countries.forEach(country => {
+						data.push({
+							label: country.name,
+							value: country.name
+						});
+					});
+					countryControl.setData(data);
+				});
+		}
 	}
 }
