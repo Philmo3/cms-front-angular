@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormInputFactoryComponent } from "./form-input-factory.component";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
+import { NzSelectModule } from "ng-zorro-antd/select";
 import { SharedModule } from "src/app/shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 		SharedModule,
 		FormsModule,
 		ReactiveFormsModule,
-		NzFormModule
+		NzFormModule,
+		NzSelectModule
 	],
 	exports: [FormInputFactoryComponent]
 })
