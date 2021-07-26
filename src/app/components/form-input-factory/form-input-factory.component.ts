@@ -30,6 +30,5 @@ export class FormInputFactoryComponent implements OnInit {
 				name: key
 			});
 		}
-		console.log(this.controls);
 	}
 }

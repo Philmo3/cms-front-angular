@@ -12,7 +12,7 @@ export class CompanyService {
 	constructor(private httpClient: HttpClient) {}
 
 	getByEmail(email: string): Observable<Company> {
-		return this.httpClient.get<Company>(this.endPoint, {
+		return this.httpClient.get<Company>(this.endPoint + "/by-email", {
 			params: new HttpParams().append("email", email)
 		});
 	}

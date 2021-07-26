@@ -10,7 +10,6 @@ import { AsyncEmailValidator } from "src/app/shared/asyncValidators/asyncEmailVa
 import { EqualFieldValidator } from "src/app/shared/validator/equalFieldValidator";
 import { CompanyService } from "src/app/services/company.service";
 import { CountryService } from "src/app/services/country.service";
-import { count } from "rxjs/operators";
 
 @Component({
 	selector: "app-customer-sign-up",
@@ -61,11 +60,11 @@ export class CustomerSignUpComponent implements OnInit {
 					)
 				})
 			],
-			sectionNumber: 0
+			sectionNumber: 1
 		},
 		{
 			sectionTitle: "Company Information",
-			sectionNumber: 1,
+			sectionNumber: 0,
 			formGroups: [
 				new FormGroup({
 					name: new FormTypedControl(
@@ -112,6 +111,11 @@ export class CustomerSignUpComponent implements OnInit {
 			]
 		}
 	];
+
+	creationState = "company" || "user" || "finish";
+	creationMessage = "Creating your company";
+
+	onFinish = async () => {};
 
 	constructor(
 		private userService: UserService,

@@ -16,7 +16,7 @@
         nzSize="large"
         />
         <input  *ngSwitchCase="'password'" type="password" nz-input [formControlName]='control.name' [placeholder]='control.name' nzSize="large" [required]='control.control.formAttributes.required ? control.control.formAttributes.required : false' />
-        <nz-select *ngSwitchCase="'dropDown'" formControlName="phoneNumberPrefix" class="phone-select">
+        <nz-select *ngSwitchCase="'dropDown'" [formControlName]="control.name" class="phone-select">
           <nz-option *ngFor="let data of control.control.data" [nzLabel]="data.value" [nzValue]="data.label"></nz-option>
         </nz-select>
       </nz-form-control>

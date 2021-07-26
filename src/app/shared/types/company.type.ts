@@ -2,7 +2,6 @@ export type Company = {
 	name: string;
 	email: string;
 	phone: string;
-	conctactPerson: string;
+	contactPerson: string;
 	country: string;
-	stateOrProvince: string;
 };

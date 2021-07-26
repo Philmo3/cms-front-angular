@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { FormWithSteperModule } from "src/app/components/form-with-steper/form-with-steper.module";
 import { CountryService } from "src/app/services/country.service";
+
+import { NzSpinModule } from "ng-zorro-antd/spin";
 const routes: Routes = [
 	{
 		path: "",
@@ -19,7 +21,8 @@ const routes: Routes = [
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule.forChild(routes),
-		FormWithSteperModule
+		FormWithSteperModule,
+		NzSpinModule
 	],
 	exports: [RouterModule],
 	providers: [CountryService]
