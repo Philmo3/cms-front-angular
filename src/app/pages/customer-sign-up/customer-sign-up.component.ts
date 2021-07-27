@@ -10,6 +10,8 @@ import { AsyncEmailValidator } from "src/app/shared/asyncValidators/asyncEmailVa
 import { EqualFieldValidator } from "src/app/shared/validator/equalFieldValidator";
 import { CompanyService } from "src/app/services/company.service";
 import { CountryService } from "src/app/services/country.service";
+import { CompanyDto } from "src/app/shared/dtos/company.dto";
+import { UserDto } from "src/app/shared/dtos/user.dto";
 
 @Component({
 	selector: "app-customer-sign-up",
@@ -91,7 +93,7 @@ export class CustomerSignUpComponent implements OnInit {
 						{},
 						"The phone is required"
 					),
-					conctactPerson: new FormTypedControl(
+					contactPerson: new FormTypedControl(
 						"text",
 						"",
 						Validators.required,
@@ -112,10 +114,27 @@ export class CustomerSignUpComponent implements OnInit {
 		}
 	];
 
-	creationState = "company" || "user" || "finish";
-	creationMessage = "Creating your company";
+	creationState: "creating" | "finished" = "creating";
+	creationMessage = "Creating your account";
 
-	onFinish = async () => {};
+	onFinish = async () => {
+		const company = await this.companyService
+			.create(
+				this.getFormSectionValueByTitle<CompanyDto>("Company Information")
+			)
+			.toPromise();
+
+		const userDto = {
+			...this.getFormSectionValueByTitle<Partial<UserDto>>(
+				"Personal Information"
+			),
+			companyId: company._id
+		};
+
+		await this.userService.create(userDto as UserDto).toPromise();
+
+		this.creationState = "finished";
+	};
 
 	constructor(
 		private userService: UserService,
@@ -152,5 +171,19 @@ export class CustomerSignUpComponent implements OnInit {
 					countryControl.setData(data);
 				});
 		}
+	}
+
+	private getFormSectionValueByTitle<F>(title: string): F {
+		const section = this.signUpFormStepper.find(
+			formStep => formStep.sectionTitle === title
+		);
+
+		let formsValue: Partial<F> = {};
+		section?.formGroups.forEach((group: FormGroup) => {
+			formsValue = { ...formsValue, ...(group.value as Partial<F>) };
+		});
+
+		console.log(formsValue);
+		return formsValue as F;
 	}
 }

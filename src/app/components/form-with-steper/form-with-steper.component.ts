@@ -23,6 +23,8 @@ export class FormWithSteperComponent implements OnInit, AfterViewInit {
 
 	totalStep = 0;
 
+	isFinish = false;
+
 	constructor() {}
 
 	ngAfterViewInit(): void {
@@ -35,7 +37,8 @@ export class FormWithSteperComponent implements OnInit, AfterViewInit {
 		if (this.currentSectionFormIsValid()) {
 			this.currentSteps += 1;
 		}
-		if (this.onFinish) {
+		if (this.onFinish && this.currentSteps === this.totalStep) {
+			this.isFinish = true;
 			await this.onFinish();
 		}
 	}

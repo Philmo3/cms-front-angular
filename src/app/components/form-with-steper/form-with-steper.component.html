@@ -15,7 +15,7 @@
 </div>
 
 <div class="w-100 d-flex justify-content-between my-4">
-  <button (click)='previous()' nz-button nzType="default">Previous section</button>
+  <button *ngIf='!isFinish' (click)='previous()' nz-button nzType="default">Previous section</button>
   <button *ngIf="currentSteps < totalStep" (click)='next()' nz-button nzType="primary">Next section</button>
 </div>
 
