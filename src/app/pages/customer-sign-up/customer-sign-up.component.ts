@@ -183,7 +183,6 @@ export class CustomerSignUpComponent implements OnInit {
 			formsValue = { ...formsValue, ...(group.value as Partial<F>) };
 		});
 
-		console.log(formsValue);
 		return formsValue as F;
 	}
 }
