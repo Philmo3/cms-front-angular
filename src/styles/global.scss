@@ -15,6 +15,10 @@ body {
 
   &_section{
     padding: 3em;
+
+    @media (max-width: $s-tablet-bp) {
+      padding: 1em;
+    }
   }
 
 }

@@ -27,11 +27,11 @@ export class FormWithSteperComponent implements OnInit, AfterViewInit {
 
 	constructor() {}
 
-	ngAfterViewInit(): void {
+	ngAfterViewInit(): void {}
+
+	ngOnInit(): void {
 		this.setTotalStep();
 	}
-
-	ngOnInit(): void {}
 
 	async next(): Promise<void> {
 		if (this.currentSectionFormIsValid()) {

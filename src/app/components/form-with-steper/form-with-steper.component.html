@@ -2,7 +2,7 @@
   <ng-container *ngFor="let formStepper of formSteppers">
     <div [ngClass]='formExtraClass' *ngSwitchCase="formStepper.sectionNumber">
       <app-form-section [ngClass]='sectionExtraClass'  [title]="formStepper.sectionTitle">
-          <form nzForm *ngFor="let formGroup of formStepper.formGroups" >
+          <form nz-form *ngFor="let formGroup of formStepper.formGroups" >
               <app-form-input-factory [formGroup]='formGroup' class="w-100" [inputExtraClass]='inputExtraClass' > </app-form-input-factory>
           </form>
       </app-form-section>
