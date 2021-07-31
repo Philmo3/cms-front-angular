@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzButtonModule } from "ng-zorro-antd/button";
+import { NzSpinModule } from "ng-zorro-antd/spin";
 
 const routes: Routes = [
 	{
@@ -23,7 +24,8 @@ const routes: Routes = [
 		ReactiveFormsModule,
 		NzFormModule,
 		NzInputModule,
-		NzButtonModule
+		NzButtonModule,
+		NzSpinModule
 	],
 	exports: [RouterModule]
 })

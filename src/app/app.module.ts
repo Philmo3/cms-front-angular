@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -14,7 +14,19 @@ import { NzMenuModule } from "ng-zorro-antd/menu";
 import { NzDrawerModule } from "ng-zorro-antd/drawer";
 import { HeaderComponent } from "./components/header/header.component";
 import { BurgerMenuComponent } from "./components/header/burger-menu/burger-menu.component";
+import { AuthService } from "./services/auth.service";
 registerLocaleData(en);
+
+function authLoader(authService: AuthService) {
+	console.log("in authLoader");
+	return () =>
+		authService
+			.onAppInit()
+			.catch(error => console.log(error))
+			.finally(() => {
+				console.log("in authloader final");
+			});
+}
 
 @NgModule({
 	declarations: [AppComponent, HeaderComponent, BurgerMenuComponent],
@@ -27,7 +39,18 @@ registerLocaleData(en);
 		NzMenuModule,
 		NzDrawerModule
 	],
-	providers: [{ provide: NZ_I18N, useValue: en_US }],
+	providers: [
+		{
+			provide: NZ_I18N,
+			useValue: en_US
+		},
+		{
+			provide: APP_INITIALIZER,
+			deps: [AuthService],
+			useFactory: authLoader,
+			multi: true
+		}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

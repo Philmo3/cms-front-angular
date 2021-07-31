@@ -11,9 +11,13 @@
     <div class="d-flex justify-content-center w-100" finishContent >
 
 
-      <nz-spin nzSimple nzTip='Creating your company..'></nz-spin>
+      <nz-spin *ngIf="creationState === 'creating'; else created" nzSimple nzTip='Creating your account..'></nz-spin>
 
-
+      <ng-template #created>
+        <div>
+          <p>Your account have been successfully created, you can now <a [routerLink]='["/login"]'>login</a> </p>
+        </div>
+      </ng-template>
     </div>
   </app-form-with-steper>
 

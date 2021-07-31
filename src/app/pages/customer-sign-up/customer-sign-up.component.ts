@@ -115,7 +115,6 @@ export class CustomerSignUpComponent implements OnInit {
 	];
 
 	creationState: "creating" | "finished" = "creating";
-	creationMessage = "Creating your account";
 
 	onFinish = async () => {
 		const company = await this.companyService

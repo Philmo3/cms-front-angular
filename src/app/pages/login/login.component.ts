@@ -10,6 +10,8 @@ import { AuthService } from "src/app/services/auth.service";
 export class LoginComponent implements OnInit {
 	isLoading = false;
 
+	userNotFoundError = false;
+
 	loginForm = new FormGroup({
 		email: new FormControl("", [Validators.required, Validators.email]),
 		password: new FormControl("", [Validators.required])
@@ -21,17 +23,24 @@ export class LoginComponent implements OnInit {
 
 	async login() {
 		if (this.loginForm.valid) {
-			this.authService
-				.login(
-					this.loginForm.get("email")?.value,
-					this.loginForm.get("password")?.value
-				)
-				.toPromise()
-				.catch(error => console.log(error))
-				.then(() => {
-					this.isLoading = false;
-					console.log(this.authService.currentUser);
-				});
+			this.isLoading = true;
+			setTimeout(() => {
+				this.authService
+					.login(
+						this.loginForm.get("email")?.value,
+						this.loginForm.get("password")?.value
+					)
+					.toPromise()
+					.then(() => {
+						this.isLoading = false;
+						this.userNotFoundError = false;
+						console.log(this.authService.currentUser);
+					})
+					.catch(error => {
+						this.isLoading = false;
+						this.userNotFoundError = true;
+					});
+			}, 3000);
 		}
 	}
 }

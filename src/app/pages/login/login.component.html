@@ -1,6 +1,7 @@
 <div class="Page_section Login">
 
   <form nz-form class="Login_form" [formGroup]='loginForm'>
+    <p *ngIf="userNotFoundError" class="error"> Sorry, no user could be found </p>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your email!">
         <nz-input-group nzPrefixIcon="user">
@@ -20,12 +21,14 @@
         <a routerLink='' class="login-form-forgot">Forgot password</a>
       </div>
     </div>
-    <div class="mt-4" nz-row>
+    <div *ngIf="!isLoading; else notLoading" class="mt-4" nz-row>
       <button nz-button nz-col class="align-self-center" nzType="default" (click)='login()' >Log in</button>
       <p nz-col class="m-0 mx-2 align-self-center">Or</p>
       <a nz-col class="align-self-center mx-2" [routerLink]='["/sign-up"]'>register now!</a>
     </div>
-
+    <ng-template #notLoading>
+      <nz-spin class="mt-4" nz-row nzTip='Loging in ..'></nz-spin>
+    </ng-template>
   </form>
 
 </div>

@@ -20,6 +20,22 @@ export class AuthService {
 
 	constructor(private httpClient: HttpClient) {}
 
+	async onAppInit() {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await this.refreshToken()
+					.toPromise()
+					.then(async () => {
+						await this.fetchCurrentUserData().toPromise();
+						resolve(true);
+					});
+			} catch (err) {
+				this.currentUser$.next(undefined);
+				reject("refeshed failed");
+			}
+		});
+	}
+
 	login(email: string, password: string): Observable<HttpResponse<User>> {
 		return this.httpClient
 			.post<User>(
@@ -39,17 +55,13 @@ export class AuthService {
 	private loginPipe(source: Observable<HttpResponse<User>>) {
 		return new Observable<HttpResponse<User>>(subscriber => {
 			return source.subscribe({
-				next: (user: HttpResponse<User>) =>
-					this.onLoginSuccess(subscriber, user),
+				next: () => this.onLoginSuccess(subscriber),
 				error: err => subscriber.error(err)
 			});
 		});
 	}
 
-	private onLoginSuccess(
-		subscriber: Subscriber<HttpResponse<User>>,
-		response: HttpResponse<User>
-	) {
+	private onLoginSuccess(subscriber: Subscriber<HttpResponse<User>>) {
 		this.fetchCurrentUserData()
 			.toPromise()
 			.then(() => {
@@ -79,6 +91,25 @@ export class AuthService {
 	private setCurrentUser(subscriber: Subscriber<User>, user: User) {
 		this.currentUser$.next(user);
 		this.currentUser = user;
+		this.refreshProcess();
 		subscriber.next(user);
+	}
+
+	private refreshProcess() {
+		if (this.currentUser) {
+			setInterval(() => {
+				this.refreshToken().pipe().toPromise();
+			}, 30000);
+		}
+	}
+
+	private refreshToken() {
+		return this.httpClient.post(
+			this.endPoint + "/refresh",
+			{},
+			{
+				withCredentials: true
+			}
+		);
 	}
 }
