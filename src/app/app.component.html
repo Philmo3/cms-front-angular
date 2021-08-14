@@ -1,4 +1,12 @@
 
+<ng-container *ngIf="!loggedInUser; else connected">
+  <app-header ></app-header>
+  <router-outlet></router-outlet>
+</ng-container>
 
-<app-header></app-header>
-<router-outlet></router-outlet>
+<ng-template #connected >
+  <app-logged-in-nav>
+    <router-outlet></router-outlet>
+  </app-logged-in-nav>
+
+</ng-template>

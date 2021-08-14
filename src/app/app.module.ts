@@ -11,10 +11,13 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NzMenuModule } from "ng-zorro-antd/menu";
+import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzDrawerModule } from "ng-zorro-antd/drawer";
 import { HeaderComponent } from "./components/header/header.component";
 import { BurgerMenuComponent } from "./components/header/burger-menu/burger-menu.component";
 import { AuthService } from "./services/auth.service";
+import { NzLayoutModule } from "ng-zorro-antd/layout";
+import { LoggedInNavComponent } from "./components/logged-in-nav/logged-in-nav.component";
 registerLocaleData(en);
 
 function authLoader(authService: AuthService) {
@@ -29,7 +32,12 @@ function authLoader(authService: AuthService) {
 }
 
 @NgModule({
-	declarations: [AppComponent, HeaderComponent, BurgerMenuComponent],
+	declarations: [
+		AppComponent,
+		HeaderComponent,
+		BurgerMenuComponent,
+		LoggedInNavComponent
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -37,7 +45,9 @@ function authLoader(authService: AuthService) {
 		HttpClientModule,
 		BrowserAnimationsModule,
 		NzMenuModule,
-		NzDrawerModule
+		NzDrawerModule,
+		NzLayoutModule,
+		NzIconModule
 	],
 	providers: [
 		{

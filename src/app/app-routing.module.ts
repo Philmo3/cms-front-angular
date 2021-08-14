@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { IsLoggedInGuard } from "./guards/is-logged-in.guard";
 
 const routes: Routes = [
 	{
@@ -25,6 +26,14 @@ const routes: Routes = [
 		path: "login",
 		loadChildren: () =>
 			import("./pages/login/login.module").then(module => module.LoginModule)
+	},
+	{
+		path: "dashboard",
+		loadChildren: () =>
+			import("./pages/dashboard/dashboard.module").then(
+				module => module.DashboardModule
+			),
+		canActivate: [IsLoggedInGuard]
 	}
 ];
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subscriber } from "rxjs";
+import { BehaviorSubject, Observable, Subject, Subscriber } from "rxjs";
+import { subscribeOn, takeUntil } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { User } from "../shared/types/users.type";
 
@@ -15,6 +16,8 @@ export class AuthService {
 	);
 	currentUserObservable$: Observable<User | undefined> =
 		this.currentUser$.asObservable();
+
+	private refreshProcessIsStarted = false;
 
 	private endPoint = environment.apiUrl + "/auth";
 
@@ -52,11 +55,32 @@ export class AuthService {
 			.pipe(this.loginPipe.bind(this));
 	}
 
+	logout() {
+		return this.httpClient
+			.post<any>(
+				this.endPoint + "/logout",
+				{},
+				{
+					withCredentials: true
+				}
+			)
+			.pipe(this.logoutPipe.bind(this));
+	}
 	private loginPipe(source: Observable<HttpResponse<User>>) {
 		return new Observable<HttpResponse<User>>(subscriber => {
 			return source.subscribe({
 				next: () => this.onLoginSuccess(subscriber),
 				error: err => subscriber.error(err)
+			});
+		});
+	}
+
+	private logoutPipe(source: Observable<any>) {
+		return new Observable<any>(subscriber => {
+			return source.subscribe({
+				next: () => this.onLogoutSuccess(subscriber),
+				error: err => subscriber.error(err),
+				complete: subscriber.complete
 			});
 		});
 	}
@@ -72,6 +96,11 @@ export class AuthService {
 			});
 	}
 
+	private onLogoutSuccess(subscriber: Subscriber<any>) {
+		this.setCurrentUser(undefined);
+		subscriber.complete();
+	}
+
 	private fetchCurrentUserData() {
 		return this.httpClient
 			.post<User>(this.endPoint + "/me", {}, { withCredentials: true })
@@ -81,25 +110,32 @@ export class AuthService {
 	private onFetchingUserData(source: Observable<User>) {
 		return new Observable<User>(subscriber => {
 			return source.subscribe({
-				next: (user: User) => this.setCurrentUser(subscriber, user),
+				next: (user: User) => this.onSucessFetchUserData(subscriber, user),
 				error: error => subscriber.error(error),
 				complete: () => subscriber.complete()
 			});
 		});
 	}
 
-	private setCurrentUser(subscriber: Subscriber<User>, user: User) {
-		this.currentUser$.next(user);
-		this.currentUser = user;
+	private onSucessFetchUserData(subscriber: Subscriber<User>, user: User) {
+		this.setCurrentUser(user);
 		this.refreshProcess();
 		subscriber.next(user);
 	}
 
+	private setCurrentUser(user: User | undefined) {
+		this.currentUser$.next(user);
+		this.currentUser = user;
+	}
+
 	private refreshProcess() {
-		if (this.currentUser) {
+		if (this.currentUser && !this.refreshProcessIsStarted) {
 			setInterval(() => {
-				this.refreshToken().pipe().toPromise();
+				if (this.currentUser) {
+					this.refreshToken().toPromise();
+				}
 			}, 30000);
+			this.refreshProcessIsStarted = true;
 		}
 	}
 

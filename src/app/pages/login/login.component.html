@@ -23,7 +23,7 @@
     </div>
     <div *ngIf="!isLoading; else notLoading" class="mt-4" nz-row>
       <button nz-button nz-col class="align-self-center" nzType="default" (click)='login()' >Log in</button>
-      <p nz-col class="m-0 mx-2 align-self-center">Or</p>
+      <p nz-col class="m-0 m-r-2 m-l-4 align-self-center">Or</p>
       <a nz-col class="align-self-center mx-2" [routerLink]='["/sign-up"]'>register now!</a>
     </div>
     <ng-template #notLoading>

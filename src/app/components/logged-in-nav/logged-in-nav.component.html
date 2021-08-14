@@ -1,0 +1,31 @@
+
+<nz-layout class="LoggedInNav">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="LoggedInNav_companyName d-flex justify-content-center align-items-center">
+      <p>{{currentUserCompany?.name}}</p>
+    </div>
+    <ul class="LoggedInNav_sideMenu" nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item >
+        <i nz-icon nzType="cloud"></i>
+        <span>Sites</span>
+      </li>
+      <li nz-menu-item >
+        <i nz-icon nzType="file"></i>
+        <span>Pages</span>
+      </li>
+      <li nz-menu-item >
+        <i nz-icon nzType="team"></i>
+        <span>Users</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header class="LoggedInNav_topHeader d-flex justify-content-end">
+      <p class="clickable"> {{currentUser?.name}} {{currentUser?.lastName}} </p>
+      <p class="mx-4 clickable" (click)='logout()'>disconnect</p>
+    </nz-header>
+    <nz-content>
+        <ng-content select="router-outlet"></ng-content>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
