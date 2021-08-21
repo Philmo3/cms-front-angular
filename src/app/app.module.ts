@@ -19,18 +19,11 @@ import { AuthService } from "./services/auth.service";
 import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { LoggedInNavComponent } from "./components/logged-in-nav/logged-in-nav.component";
 import { NzButtonModule } from "ng-zorro-antd/button";
-import { AddClassOnClickDirective } from './directives/add-class-on-click.directive';
+import { AddClassOnClickDirective } from "./directives/add-class-on-click.directive";
 registerLocaleData(en);
 
 function authLoader(authService: AuthService) {
-	console.log("in authLoader");
-	return () =>
-		authService
-			.onAppInit()
-			.catch(error => console.log(error))
-			.finally(() => {
-				console.log("in authloader final");
-			});
+	return () => authService.onAppInit().catch(error => console.log(error));
 }
 
 @NgModule({
@@ -39,7 +32,7 @@ function authLoader(authService: AuthService) {
 		HeaderComponent,
 		BurgerMenuComponent,
 		LoggedInNavComponent,
-  AddClassOnClickDirective
+		AddClassOnClickDirective
 	],
 	imports: [
 		BrowserModule,
