@@ -1,3 +1,4 @@
+@import '../../../styles.scss';
 .LoggedInNav{
   min-height: 100vh;
 
@@ -12,13 +13,67 @@
   }
 
   &_sideMenu{
-    color: rgba($color: white, $alpha: 0.65);
+
     li{
       margin: 0;
     }
   }
 
   &_topHeader{
-    color: rgba($color: white, $alpha: 0.65);
+    color:$primary;
+  }
+
+  &_collapse-button{
+    right: -23%;
+    top: 64px;
+    width: 45px;
+    display: flex;
+    height: 42px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_collapse-button-activated{
+    right: -59%;
+  }
+
+  nz-sider{
+    background-color: white;
+    border-right: $primary solid 1px;
+  }
+
+  nz-header{
+    background-color: white;
+    border-bottom: $primary 1px solid;
+  }
+
+  .ant-menu{
+    background-color: white;
+    padding: 0;
+  }
+
+  .ant-menu-item{
+    background-color: white;
+    border: none;
+    color: $primary;
+
+    border: $primary solid 1px;
+    border-bottom: none;
+    border-right: none;
+
+    &:last-child{
+      border-bottom: $primary solid 1px;
+    }
+  }
+
+  .ant-menu-item-selected{
+
+     span{
+      color: black;
+     }
+
+     .anticon{
+       color: black;
+     }
   }
 }

@@ -18,6 +18,8 @@ import { BurgerMenuComponent } from "./components/header/burger-menu/burger-menu
 import { AuthService } from "./services/auth.service";
 import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { LoggedInNavComponent } from "./components/logged-in-nav/logged-in-nav.component";
+import { NzButtonModule } from "ng-zorro-antd/button";
+import { AddClassOnClickDirective } from './directives/add-class-on-click.directive';
 registerLocaleData(en);
 
 function authLoader(authService: AuthService) {
@@ -36,7 +38,8 @@ function authLoader(authService: AuthService) {
 		AppComponent,
 		HeaderComponent,
 		BurgerMenuComponent,
-		LoggedInNavComponent
+		LoggedInNavComponent,
+  AddClassOnClickDirective
 	],
 	imports: [
 		BrowserModule,
@@ -47,7 +50,8 @@ function authLoader(authService: AuthService) {
 		NzMenuModule,
 		NzDrawerModule,
 		NzLayoutModule,
-		NzIconModule
+		NzIconModule,
+		NzButtonModule
 	],
 	providers: [
 		{

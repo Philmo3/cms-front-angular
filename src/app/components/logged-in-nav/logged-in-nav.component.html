@@ -1,11 +1,15 @@
 
 <nz-layout class="LoggedInNav">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <button ClassOnClick classOnClick='LoggedInNav_collapse-button-activated' nz-button nzSize="large" nzType="primary" class="LoggedInNav_collapse-button  position-absolute" (click)=' isCollapsed = !isCollapsed'>
+      <i nz-icon [nzType]=' isCollapsed ? "double-right" : "double-left" ' nzTheme="outline"></i>
+    </button>
     <div class="LoggedInNav_companyName d-flex justify-content-center align-items-center">
       <p>{{currentUserCompany?.name}}</p>
     </div>
     <ul class="LoggedInNav_sideMenu" nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item >
+
         <i nz-icon nzType="cloud"></i>
         <span>Sites</span>
       </li>
@@ -18,11 +22,16 @@
         <span>Users</span>
       </li>
     </ul>
+
   </nz-sider>
   <nz-layout>
+
     <nz-header class="LoggedInNav_topHeader d-flex justify-content-end">
-      <p class="clickable"> {{currentUser?.name}} {{currentUser?.lastName}} </p>
-      <p class="mx-4 clickable" (click)='logout()'>disconnect</p>
+
+      <div class="d-flex">
+        <p class="clickable mx-4"> {{currentUser?.name}} {{currentUser?.lastName}} </p>
+        <p class="clickable" (click)='logout()'>disconnect</p>
+      </div>
     </nz-header>
     <nz-content>
         <ng-content select="router-outlet"></ng-content>
