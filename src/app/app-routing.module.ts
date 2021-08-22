@@ -28,11 +28,9 @@ const routes: Routes = [
 			import("./pages/login/login.module").then(module => module.LoginModule)
 	},
 	{
-		path: "dashboard",
+		path: "sites",
 		loadChildren: () =>
-			import("./pages/dashboard/dashboard.module").then(
-				module => module.DashboardModule
-			),
+			import("./pages/sites/sites.module").then(module => module.SitesModule),
 		canActivate: [IsLoggedInGuard]
 	}
 ];

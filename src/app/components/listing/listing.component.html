@@ -1,0 +1,13 @@
+<div *ngIf="!isLoading && fetchResult?.data?.length; else loading">
+
+</div>
+
+<ng-template #loading >
+  <nz-spin *ngIf='isLoading; else noData'></nz-spin>
+</ng-template>
+
+<ng-template #noData  >
+  <div>
+    oups.. nothing to be found
+  </div>
+</ng-template>

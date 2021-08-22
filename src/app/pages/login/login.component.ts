@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
 					.then(() => {
 						this.isLoading = false;
 						this.userNotFoundError = false;
-						this.router.navigate(["dashboard"]);
-						console.log(this.authService.currentUser);
+						this.router.navigate(["sites"]);
 					})
 					.catch(error => {
 						this.isLoading = false;

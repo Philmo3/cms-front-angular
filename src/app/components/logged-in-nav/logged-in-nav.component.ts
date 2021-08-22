@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { Company } from "src/app/shared/types/company.type";
 import { User } from "src/app/shared/types/users.type";
@@ -14,7 +15,7 @@ export class LoggedInNavComponent implements OnInit {
 	currentUser: User | undefined;
 	currentUserCompany: Company | undefined;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {
 		this.currentUser = this.authService.currentUser;
@@ -22,6 +23,11 @@ export class LoggedInNavComponent implements OnInit {
 	}
 
 	logout() {
-		this.authService.logout().toPromise();
+		this.authService
+			.logout()
+			.toPromise()
+			.then(() => {
+				this.router.navigate([""]);
+			});
 	}
 }
