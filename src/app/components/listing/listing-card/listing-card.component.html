@@ -1,0 +1,14 @@
+<nz-card class="ListingCard_wrapper clickable" [nzCover]="coverTemplate">
+  <nz-card-meta
+    [nzTitle]='data[dataPropertyToCard!.title]'
+    [nzDescription]='data[dataPropertyToCard!.description!]'
+
+  ></nz-card-meta>
+</nz-card>
+
+<ng-template #coverTemplate>
+  <img alt="oups" [src]="data[dataPropertyToCard!.imageUrl]" imageFallBack fallBackSource='../../../../assets/placeholder-1629163914179.png' />
+
+
+</ng-template>
+

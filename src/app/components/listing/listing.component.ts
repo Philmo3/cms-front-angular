@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { SearchResultDto } from "src/app/shared/dtos/searchResult.dto";
 
 @Component({
 	selector: "app-listing",
 	templateUrl: "./listing.component.html",
-	styleUrls: ["./listing.component.scss"]
+	styleUrls: ["./listing.component.scss"],
+	encapsulation: ViewEncapsulation.None
 })
 export class ListingComponent implements OnInit {
 	fetchResult?: SearchResultDto<any>;
@@ -23,7 +24,7 @@ export class ListingComponent implements OnInit {
 		this.executeFetch();
 	}
 
-	@Input() dataPropertyToCard: DataPropToCard | undefined;
+	@Input() dataPropertyToCard?: DataPropToCard;
 
 	constructor() {}
 

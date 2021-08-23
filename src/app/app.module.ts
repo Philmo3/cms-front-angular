@@ -20,6 +20,8 @@ import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { LoggedInNavComponent } from "./components/logged-in-nav/logged-in-nav.component";
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { AddClassOnClickDirective } from "./directives/add-class-on-click.directive";
+import { ImageFallBAckDirective } from "./directives/image-fall-back.directive";
+import { SharedModule } from "./shared/shared.module";
 registerLocaleData(en);
 
 function authLoader(authService: AuthService) {
@@ -31,8 +33,7 @@ function authLoader(authService: AuthService) {
 		AppComponent,
 		HeaderComponent,
 		BurgerMenuComponent,
-		LoggedInNavComponent,
-		AddClassOnClickDirective
+		LoggedInNavComponent
 	],
 	imports: [
 		BrowserModule,
@@ -44,7 +45,8 @@ function authLoader(authService: AuthService) {
 		NzDrawerModule,
 		NzLayoutModule,
 		NzIconModule,
-		NzButtonModule
+		NzButtonModule,
+		SharedModule
 	],
 	providers: [
 		{

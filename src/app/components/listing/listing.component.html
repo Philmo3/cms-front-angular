@@ -1,5 +1,5 @@
 <div *ngIf="!isLoading && fetchResult?.data?.length; else loading">
-
+  <app-listing-card *ngFor="let data of fetchResult?.data" [dataPropertyToCard]='dataPropertyToCard' [data]='data' ></app-listing-card>
 </div>
 
 <ng-template #loading >

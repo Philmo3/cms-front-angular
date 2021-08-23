@@ -1,0 +1,19 @@
+@import '../../../../styles.scss';
+
+.ListingCard{
+  &_wrapper{
+    max-width: 300px;
+    min-width: 200px;
+    margin: 40px;
+    display: inline-block;
+    transition: all ease-in-out 0.3s;
+
+    &:hover{
+      box-shadow: 3px 6px 28px -3px #B2B2B2;
+
+      transform: skew(-1deg, 2deg)
+    }
+  }
+
+
+}

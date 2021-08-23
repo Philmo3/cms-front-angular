@@ -8,9 +8,7 @@ export class AddClassOnClickDirective {
 
 	private isActivate = false;
 
-	constructor(private element: ElementRef) {
-		console.log(this.element);
-	}
+	constructor(private element: ElementRef) {}
 
 	@HostListener("click")
 	onClick() {
